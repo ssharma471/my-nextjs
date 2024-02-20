@@ -6,8 +6,30 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const handleLogin = () => {
-    router.push('/dashboard');
+  async function handleLogin(e) {
+    e.preventDefault();
+    try {
+      // Use fetch to send a POST request to your login endpoint
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: username, // Assuming username field is used for email
+          password: password
+        })
+      });
+
+      // Check if login was successful based on response status
+      if (response.ok) {
+        router.push('/dashboard'); // Redirect to dashboard if authentication is successful
+      } else {
+        console.error('Error logging in user:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error logging in user:', error.message);
+    }
   };
 
   return (
@@ -15,7 +37,7 @@ const Login = () => {
       <h1 style={styles.heading}>Login Page</h1>
       <form style={styles.form}>
         <label style={styles.label}>
-          Username:
+          Email:
           <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} style={styles.input} />
         </label>
         <br />
@@ -40,7 +62,6 @@ const styles = {
     justifyContent: 'center',
     minHeight: '100vh',
     backgroundColor: '#f0f0f0', 
-    // backgroundImage: '', 
     backgroundSize: 'cover',
   },
   heading: {

@@ -6,29 +6,31 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     if (password !== confirmPassword) {
       alert("Passwords do not match.");
     } else {
-      // Send data to the server
-      fetch('/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      })
-        .then((res) => {
-          console.log(res);
-          window.location = '/'; // Redirect to the home page after successful registration
-        })
-        .catch((error) => {
-          console.error('Error registering user:', error);
+      try {
+        const response = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
         });
+        if (response.ok) {
+          console.log('User registered successfully');
+          window.location = '/'; // Redirect to the home page after successful registration
+        } else {
+          console.error('Error registering user:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error registering user:', error);
+      }
     }
   }
 
