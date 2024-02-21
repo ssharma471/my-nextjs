@@ -2,8 +2,7 @@ const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-const mongoDBConnectionString = process.env.NEXT_PUBLIC_MONGODB_URI;
-
+const mongoDBConnectionString = mongodb+srv://simar:Atlas123@senecaweb.pvkyjrm.mongodb.net/bts-sample?retryWrites=true&w=majority;
 let db;
 let usersCollection;
 
