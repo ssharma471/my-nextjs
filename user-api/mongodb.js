@@ -7,13 +7,14 @@ let db;
 let usersCollection;
 
 module.exports.connect = async function () {
-    try {
-        console.log(mongoDBConnectionString);
+ try {
+        console.log('Attempting to connect to MongoDB...');
+        console.log('Connection string:', mongoDBConnectionString);
+        
         const client = await MongoClient.connect(mongoDBConnectionString, { useNewUrlParser: true, useUnifiedTopology: true });
         db = client.db();
         usersCollection = db.collection('bts530'); // Change collection name here
-        console.log('Connected to MongoDB yayyyy');
-        console.log(mongoDBConnectionString);
+        console.log('Connected to MongoDB successfully');
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
         throw error;
