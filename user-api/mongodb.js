@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-const mongoDBConnectionString = process.env.MONGODB_URI;
+const mongoDBConnectionString = process.env.NEXT_PUBLIC_MONGODB_URI;
 let db;
 let usersCollection;
 
