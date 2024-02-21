@@ -21,7 +21,7 @@ const Home = () => {
           <Link href="/register">
             <span style={styles.link}>Sign up here</span>
           </Link>
-          .
+          
         </p>
       </main>
     </div>
