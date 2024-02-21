@@ -30,7 +30,7 @@ const Login = () => {
     } catch (error) {
       console.error('Error logging in user:', error.message);
     }
-  };
+  }
 
   return (
     <div style={styles.container}>
